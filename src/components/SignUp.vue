@@ -13,48 +13,49 @@
             <input type="checkbox" v-model="check">
             <label for="">Accept terms and condition</label>
         </div>
-        <!-- Multi ckechbox -->
-        <label for="">Check language</label>
         <div>
-            <input type="checkbox" value="JavaScript" v-model="languages">
-            <label for="">JavaScript</label>
-        </div>
-        <div>
-            <input type="checkbox" value="PHP" v-model="languages">
-            <label for="">PHP</label>
-        </div>
-        <div>
-            <input type="checkbox" value="Python" v-model="languages">
-            <label for="">Python</label>
-        </div>
-        <div>
-            <input type="checkbox" value="Ruby" v-model="languages">
-            <label for="">Ruby</label>
-        </div>
-        <div>
-            <input type="checkbox" value="Java" v-model="languages">
-            <label for="">Java</label>
+            <label for="">Skill : </label>
+            <input type="text" @keyup.alt="addSkill" v-model="skill">
         </div>
     </form>
-    <p>{{ email }} {{ password }} {{ role }} {{ check }} {{ languages }}</p>
+    <p>{{ email }} </p>
+    <p> {{ password }}</p>
+    <p> {{ role }}</p>
+    <p> {{ check }}</p>
+    <span v-for="skill in skills" :key="skill"><p> {{ skill }} <span class="cross" @click="deleteSkill(skill)">&#x2716;</span></p></span>
 </template>
 
 <script>
 export default {
-data(){
-    return{
-        email : "",
-        password : "",
-        role : "",
-        check : false,
-        languages : [],
+    data() {
+        return {
+            email: "",
+            password: "",
+            role: "",
+            check: false,
+            languages: [],
+            skills : [],
+            skill : '',
+        }
+    },
+    methods: {
+        addSkill(e) {
+            if(e.key === ',' && this.skill){
+                this.skills.push(this.skill);
+                this.skill = "";
+            }
+        },
+        deleteSkill(skill){
+            this.skills = this.skills.filter(loopskill => {
+                return loopskill != skill;
+            })
+        }
     }
-}
 }
 </script>
 
 <style>
-form{
+form {
     max-width: 420px;
     margin: 30px auto;
     background: rgb(241, 239, 239);
@@ -62,7 +63,8 @@ form{
     padding: 40px;
     border-radius: 10px;
 }
-label{
+
+label {
     color: black;
     display: inline-block;
     margin: 25px 0 15px;
@@ -71,7 +73,9 @@ label{
     letter-spacing: 1px;
     font-weight: bold;
 }
-input, select{
+
+input,
+select {
     display: block;
     background: transparent;
     padding: 10px 6px;
@@ -82,11 +86,18 @@ input, select{
     color: #555;
     outline: none;
 }
-input[type=checkbox]{
+
+input[type=checkbox] {
     display: inline-block;
     width: 16px;
     position: relative;
     top: 3px;
     margin-right: 10px;
+}
+.cross{
+    cursor: pointer;
+    margin-left: 15px;
+    color: red;
+    font-weight: bold;
 }
 </style>
