@@ -1,9 +1,10 @@
 <template>
-    <form action="">
+    <form @submit.prevent="submit">
         <label for="">Email</label>
         <input type="email" name="email" v-model="email" required>
         <label for="">Password</label>
         <input type="password" name="email" v-model="password" required>
+        <p class="error">{{ errorMsg }}</p>
         <label for="">Role : </label>
         <select v-model="role">
             <option value="Web Developer">Web Developer</option>
@@ -17,6 +18,7 @@
             <label for="">Skill : </label>
             <input type="text" @keyup.alt="addSkill" v-model="skill">
         </div>
+        <button>Submit</button>
     </form>
     <p>{{ email }} </p>
     <p> {{ password }}</p>
@@ -36,6 +38,7 @@ export default {
             languages: [],
             skills : [],
             skill : '',
+            errorMsg : '',
         }
     },
     methods: {
@@ -49,6 +52,13 @@ export default {
             this.skills = this.skills.filter(loopskill => {
                 return loopskill != skill;
             })
+        },
+        submit(){
+            if(this.password.length < 8){
+                this.errorMsg = "Password Must be 8 character";
+            }else{
+                this.errorMsg = "";
+            }
         }
     }
 }
@@ -99,5 +109,15 @@ input[type=checkbox] {
     margin-left: 15px;
     color: red;
     font-weight: bold;
+}
+button{
+    display: block;
+    padding: 5px 15px;
+    margin:30px auto;
+    background: rgb(58, 58, 190);
+    color: white;
+}
+.error{
+    color:red;
 }
 </style>
