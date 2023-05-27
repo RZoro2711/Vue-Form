@@ -9,8 +9,34 @@
             <option value="Web Developer">Web Developer</option>
             <option value="Web Designer">Web Designer</option>
         </select>
+        <div>
+            <input type="checkbox" v-model="check">
+            <label for="">Accept terms and condition</label>
+        </div>
+        <!-- Multi ckechbox -->
+        <label for="">Check language</label>
+        <div>
+            <input type="checkbox" value="JavaScript" v-model="languages">
+            <label for="">JavaScript</label>
+        </div>
+        <div>
+            <input type="checkbox" value="PHP" v-model="languages">
+            <label for="">PHP</label>
+        </div>
+        <div>
+            <input type="checkbox" value="Python" v-model="languages">
+            <label for="">Python</label>
+        </div>
+        <div>
+            <input type="checkbox" value="Ruby" v-model="languages">
+            <label for="">Ruby</label>
+        </div>
+        <div>
+            <input type="checkbox" value="Java" v-model="languages">
+            <label for="">Java</label>
+        </div>
     </form>
-    <p>{{ email }} {{ password }} {{ role }}</p>
+    <p>{{ email }} {{ password }} {{ role }} {{ check }} {{ languages }}</p>
 </template>
 
 <script>
@@ -19,7 +45,9 @@ data(){
     return{
         email : "",
         password : "",
-        role : ""
+        role : "",
+        check : false,
+        languages : [],
     }
 }
 }
@@ -53,5 +81,12 @@ input, select{
     border-bottom: 1px solid black;
     color: #555;
     outline: none;
+}
+input[type=checkbox]{
+    display: inline-block;
+    width: 16px;
+    position: relative;
+    top: 3px;
+    margin-right: 10px;
 }
 </style>
